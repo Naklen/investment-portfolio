@@ -1,15 +1,18 @@
 import React from "react";
 import { BrowserRouter, Link, Route } from "react-router-dom"
-import Exchange from './screens/exchange.jsx'
-import Portfolio from './screens/portfolio.jsx'
+import Exchange from './screens/Exchange.jsx'
+import Portfolio from './screens/Portfolio.jsx'
+
+export const eel = window.eel
+eel.set_host('ws://localhost:8080')
 
 function App() {
   return (
     <BrowserRouter>
       <div className="navmenu">
         <div className="navmenu__items">
-          <Link to="/portfolio">Портфель</Link>
-          <Link to="/exchange">Биржа</Link>
+          <Link to="/Portfolio">Портфель</Link>
+          <Link to="/Exchange">Биржа</Link>
         </div>
       </div>
       <Route path="/portfolio">
@@ -17,7 +20,7 @@ function App() {
       </Route>
       <Route path="/exchange">
         <Exchange/>
-      </Route>
+      </Route>      
     </BrowserRouter>
   );
 }
