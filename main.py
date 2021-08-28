@@ -7,17 +7,9 @@ from moex import get_securities
 sys.path.insert(1, '../../')
 
 @eel.expose
-def py_print():
-    print('pyt')
-    return 'hello'
-
-
-@eel.expose
-def get_json():
-    print('pyth')    
-    res = get_securities()
-    print(res)
-    return res.to_json()
+def get_shares_list_tqbr():        
+    res = get_securities('shares', 'TQBR')
+    return res
 
 def main(develop):    
     if develop:
@@ -32,7 +24,8 @@ def main(develop):
 
     eel_kwargs = dict(
         host='localhost',
-        port=8080        
+        port=8080,
+        size=(1280, 800)
     )
     try:
         if develop:

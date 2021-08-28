@@ -1,27 +1,31 @@
 import React from "react";
-import { BrowserRouter, Link, Route } from "react-router-dom"
+import { BrowserRouter, Route } from "react-router-dom"
+import Navmenu from "./components/Navmenu.jsx";
 import Exchange from './screens/Exchange.jsx'
 import Portfolio from './screens/Portfolio.jsx'
+import './styles/App.css'
 
 export const eel = window.eel
 eel.set_host('ws://localhost:8080')
 
-function App() {
-  return (
-    <BrowserRouter>
-      <div className="navmenu">
-        <div className="navmenu__items">
-          <Link to="/Portfolio">Портфель</Link>
-          <Link to="/Exchange">Биржа</Link>
-        </div>
-      </div>
-      <Route path="/portfolio">
-        <Portfolio/>
-      </Route>
-      <Route path="/exchange">
-        <Exchange/>
-      </Route>      
-    </BrowserRouter>
+function App() {  
+    return (
+    <main className="main">
+      <BrowserRouter>        
+        <Navmenu/>
+        <div className="screen-layout">
+          <div className="navmenu-fake"/>
+          <div className="screen">
+            <Route path="/portfolio">
+              <Portfolio/>
+            </Route>
+            <Route path="/exchange">
+              <Exchange/>
+            </Route>
+          </div>
+        </div>                      
+      </BrowserRouter>
+    </main>
   );
 }
 

@@ -1,22 +1,30 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { eel } from '../App'
-import ReactJson from 'react-json-view'
+import SecuritiesList from '../components/SecuritiesList'
 
 export default function Exchange() {
-    const [state, setstate] = useState('{}')
+    const [state, setState] = useState([])
 
-    async function insertJSON() {        
-        let newState = await eel.get_json()()
-        console.log(newState)
-        setstate(newState)
+    useEffect(() => {
+        getSharesListTQBR()
+        const id = setInterval(() => {
+            getSharesListTQBR()
+        }, 60*1000)
+        return () => {
+            clearInterval(id)
+        }
+    }, [])
+
+    async function getSharesListTQBR() {       
+        setState(await eel.get_shares_list_tqbr()())
     }
 
     return (
-        <div>
-            <h1>Биржа</h1>
-            <button onClick={insertJSON}>Жми</button>
-            <ReactJson src={JSON.parse(state)}></ReactJson>
-            <p>{ JSON.parse(state).SHORTNAME.AFLT }</p>
+        <div className="exchange">
+            <h1 className="exchange__title">Биржа</h1>
+            <div className="exchange__body">
+                <SecuritiesList securities={state}></SecuritiesList>
+            </div>
         </div>
     )
 }

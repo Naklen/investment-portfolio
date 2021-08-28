@@ -4,19 +4,18 @@
 import apimoex
 import requests
 import pandas as pd
+import json
 
 
-def get_securities():
-    request_url = "https://iss.moex.com/iss/engines/stock/markets/shares/boards/TQBR/securities.json"
-    arguments = {"securities.columns": ("SECID," "SHORTNAME, " "PREVPRICE")}
+def get_securities(market, board):
+    request_url = f"https://iss.moex.com/iss/engines/stock/markets/{market}/boards/{board}/securities.json"
+    arguments = {"securities.columns": (
+        "SECID," "SHORTNAME, " "PREVPRICE"), 'marketdata.columns': ('LAST, ' 'CHANGE,' 'LASTTOPREVPRICE')}
 
     with requests.Session() as session:
         iss = apimoex.ISSClient(session, request_url, arguments)
-        data = iss.get()
-        #await asyncio.sleep(10)
-        df = pd.DataFrame(data["securities"])
-        df.set_index("SECID", inplace=True)
-        # print(df.head(), "\n")
-        # print(df.tail(), "\n")
-        # df.info()    
-    return df
+        data = iss.get()        
+        res = []
+        for s, m in zip(data['securities'], data['marketdata']):
+            res.append({**s, **m})
+        return res
