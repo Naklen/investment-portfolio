@@ -3,14 +3,15 @@ import { BrowserRouter, Route } from "react-router-dom"
 import Navmenu from "./components/Navmenu.jsx";
 import Exchange from './screens/Exchange.jsx'
 import Portfolio from './screens/Portfolio.jsx'
+import Security from "./screens/Security.jsx";
 import './styles/App.css'
 
 export const eel = window.eel
 eel.set_host('ws://localhost:8080')
 
 function App() {  
-    return (
-    <main className="main">
+  return (
+    <main className="main">    
       <BrowserRouter>        
         <Navmenu/>
         <div className="screen-layout">
@@ -22,9 +23,12 @@ function App() {
             <Route path="/exchange">
               <Exchange/>
             </Route>
+            <Route path="/security/:market/:board/:secid">
+              <Security/>
+            </Route>
           </div>
         </div>                      
-      </BrowserRouter>
+      </BrowserRouter>    
     </main>
   );
 }
