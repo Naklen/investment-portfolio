@@ -2,17 +2,21 @@ import eel
 import asyncio
 import sys
 import platform
-from moex import get_securities, get_changing_fields
+from moex import Moex
 
 sys.path.insert(1, '../../')
 
 @eel.expose
 def get_securities_list(market, board):
-    return get_securities(market, board)
+    return Moex.get_securities(market, board)
 
 @eel.expose
-def get_changing_fields_list(market, board):
-    return get_changing_fields(market, board)
+def get_securities_changing_fields_list(market, board):
+    return Moex.get_changing_fields(market, board)
+
+@eel.expose
+def get_security_data(market, board, secid):
+    return Moex.get_security(market, board, secid)
 
 def main(develop):    
     if develop:
