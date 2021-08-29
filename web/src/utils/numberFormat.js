@@ -1,0 +1,1 @@
+export const nf = new Intl.NumberFormat('ru-RU').format

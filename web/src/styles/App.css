@@ -19,6 +19,7 @@
 
 .main {
     height: 100vh;
+    color: black;
 }
 
 .screen-layout {
@@ -56,7 +57,7 @@
     align-items: center;
     padding-left: 20px;
     text-decoration: none;
-    color: black;
+    color: inherit;
     font-size: 18px;
 }
 
@@ -122,27 +123,126 @@
     width: 150px;
     display: flex;
     align-items: center;
+}
+
+.securities-list-item__price-block {
     flex-direction: column;
+}
+
+.securities-list-item__price-block .security__change-block :first-child{
+    position: relative;
+}
+
+.securities-list-item__price-block .security__change-block :first-child:after {
+    height: 1em;
+    width: 1px;
+    background-color: black;
+    display: block;
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;   
 }
 
 .security__change-block {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    position: relative;
+    width: 100%;    
 }
 
 .security__change,
 .security__change-percent {
     font-size: small;
     color: gray;
+    background-color: transparent;
+    overflow: visible;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .security__change_positive,
 .security__change-percent_positive {
-    color: #009900
+    color: rgb(15, 166, 108);
 }
 
 .security__change_negative,
 .security__change-percent_negative {
-    color: #cc0000
+    color: crimson;
+}
+
+
+.security-screen__title {
+    margin: 25px 0 10px 0;
+}
+
+.security-screen__board {
+    color: #969696;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.security-screen__trade-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.security-screen__price-block {
+    width: 16%;
+    justify-content: center;
+}
+
+.security-screen__price-block .security__price {
+    font-size: 1.4em;
+    margin-right: 5px;
+}
+
+.security-screen__price-block .security__change-block {
+    flex-direction: column;
+    width: initial;
+}
+
+.security-screen__price-block .security__change-block .security__change,
+.security-screen__price-block .security__change-block .security__change-percent {
+    width: initial;
+}
+
+.trade-info__info-unit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+}
+
+.trade-info__info-unit span {
+    font-size: 0.9em;
+    color:  #666;
+}
+
+
+.security-screen__params-of-instr {
+    width: 100%;
+}
+
+.params-of-instr__parameter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 25px;
+    height: 2em;
+    border-bottom: #eee 1px solid;
+}
+
+.params-of-instr__parameter:hover{
+    background-color: #eee;
+}
+
+.parameter__name {
+    color: #666;
+}
+
+.parameter__value {
+    font-weight: bold;
 }

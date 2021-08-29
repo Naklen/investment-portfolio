@@ -18,7 +18,6 @@ export default function Exchange() {
     }, [exchangeState])
 
     async function setSpecifiedSecurities(market, board) {        
-        console.log('rab')
         setSecurities(await eel.get_securities_list(market, board)())
     }
 
