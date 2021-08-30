@@ -24,7 +24,7 @@ export default function Security() {
 
     return (
         <div className="security-screen">
-            <h1 className="security-screen__title">{security.SECNAME}</h1>
+            <h1 className="security-screen__title header">{security.SECNAME}</h1>
             <div className="security-screen__board">Режим торгов: {security.BOARDNAME} ({security.BOARDID})</div>
             <SecurityTradeInfo security={security} />
             <SecurityParametersOfInstrument security={security}/>

@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { eel } from '../App'
 import SecuritiesList from '../components/SecuritiesList'
+import ExchangeSidebar from '../components/sidebar/ExchangeSidebar'
 import { ExchangeContext } from '../context'
+
 
 export default function Exchange() {
     const [securities, setSecurities] = useState([])
-    const [exchangeState, setExchangeState] = useState({ market: 'shares', board: 'tqbr' })
+    const {exchangeState} = useContext(ExchangeContext)
 
     useEffect(() => {
         setSpecifiedSecurities(exchangeState.market, exchangeState.board)
@@ -21,17 +23,13 @@ export default function Exchange() {
         setSecurities(await eel.get_securities_list(market, board)())
     }
 
-    return (
-    <ExchangeContext.Provider value={{
-      exchangeState,
-      setExchangeState
-    }}>
+    return (        
         <div className="exchange">
-            <h1 className="exchange__title">Биржа</h1>
+            <h1 className="exchange__title header">Биржа</h1>
             <div className="exchange__body">
                 <SecuritiesList securities={securities}></SecuritiesList>
-            </div>
-        </div>
-        </ExchangeContext.Provider>
+                <ExchangeSidebar />
+            </div>                
+        </div>        
     )
 }

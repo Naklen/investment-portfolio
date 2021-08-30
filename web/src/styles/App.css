@@ -14,17 +14,25 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto';
-    overflow-x: hidden;
+    overflow-x: hidden;    
 }
+
+/* *::-webkit-scrollbar {
+    width: 10px;
+} */
 
 .main {
     height: 100vh;
-    color: black;
+    color: black;    
+}
+
+.header {
+    margin: 10px 0 10px 0;
 }
 
 .screen-layout {
     display: flex;
-    width: 100vw;
+    width: 100vw;    
 }
 
 
@@ -46,7 +54,7 @@
 }
 
 .navmenu-fake {    
-    width: calc(15vw + 15px);
+    width: calc(15vw + 1rem);
     min-width: 165px;
     max-width: 265px;
 }
@@ -74,11 +82,13 @@
 
 .screen {
     flex-grow: 1;
+    position: relative;
 }
 
 
 .exchange {
     position: relative;
+    width: 100%;
 }
 
 .exchange__title {
@@ -86,17 +96,25 @@
     top: 0;
     height: 50px;
     background-color: white;
-    width: 80%;    
+    width: 80%; /*otherwise it overrides the scroll*/
+    z-index: 100;
+    margin-top: 0;
+    padding-top: 10px;
 }
 
 .exchange__body {
     margin-top: 50px;
+    width: 100%;
+    display: grid;
+    grid-template: 'securities-list sidebar' 1fr
+                    / 80% 20%;
 }
 
 .securities-list {
     display: flex;
     flex-direction: column;
-    padding-right: 50px;
+    width: 100%;
+    padding-right: 1rem;
 }
 
 .securities-list__item {
@@ -112,10 +130,11 @@
 }
 
 .security__secid {
-    width: 100px;
+    min-width: 90px;
 }
 
 .security__name {
+    padding-left: 20px;
     flex-grow: 10;
 }
 
@@ -127,21 +146,6 @@
 
 .securities-list-item__price-block {
     flex-direction: column;
-}
-
-.securities-list-item__price-block .security__change-block :first-child{
-    position: relative;
-}
-
-.securities-list-item__price-block .security__change-block :first-child:after {
-    height: 1em;
-    width: 1px;
-    background-color: black;
-    display: block;
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 0;   
 }
 
 .security__change-block {
@@ -173,10 +177,21 @@
     color: crimson;
 }
 
-
-.security-screen__title {
-    margin: 25px 0 10px 0;
+.securities-list-item__price-block .security__change-block :first-child{
+    position: relative;
 }
+
+.securities-list-item__price-block .security__change-block :first-child:after {
+    height: 1em;
+    width: 1px;
+    background-color: black;
+    display: block;
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;   
+}
+
 
 .security-screen__board {
     color: #969696;
@@ -245,4 +260,14 @@
 
 .parameter__value {
     font-weight: bold;
+}
+
+
+.exchange-sidebar {    
+    position: fixed;
+    right: 17px;
+    width: calc(((85vw - 1rem) * 0.2) - 17px); /*20% of securities-list`s width minus scroll`s width*/
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
