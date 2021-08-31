@@ -11,16 +11,11 @@ export const eel = window.eel
 eel.set_host('ws://localhost:8080')
 
 function App() {
-  const [exchangeState, setExchangeState] = useState({ market: 'shares', board: 'tqbr', sort: { option: '', isDescending: false }, searchQuery: '' })
-  const updateExchangeState = (fields) => {
-    const newState = {...exchangeState}
-    fields.map((f) => newState[f.name] = f.value)
-    setExchangeState(newState)
-  }
+  const [exchangeState, setExchangeState] = useState({ market: 'shares', board: 'tqbr', sort: { option: '', isDescending: false }, searchQuery: '' })  
   return (
     <ExchangeContext.Provider value={{
       exchangeState,
-      updateExchangeState
+      setExchangeState
       }}>
       <main className="main">    
         <BrowserRouter>        

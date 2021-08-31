@@ -6,35 +6,29 @@ import Switch from '../UI/switch/Switch'
 import Input from '../UI/input/Input'
 
 export default function ExchangeSidebar() {
-    const {exchangeState, updateExchangeState} = useContext(ExchangeContext)
+    const {exchangeState, setExchangeState} = useContext(ExchangeContext)
     return (
         <aside className="exchange-sidebar">
             <Select
                 defaultValue="Сортировка"
                 value={exchangeState.sort.option}
-                onChange={option => updateExchangeState([                    
-                    { name: 'sort', value: { option, isDescending: exchangeState.sort.isDescending } }
-                ])}
+                onChange={option => setExchangeState({...exchangeState, sort: {option, isDescending: exchangeState.sort.isDescending}})}
                 options={[{ name: 'Тикер', value: 'SECID' }, { name: 'Название', value: 'SHORTNAME' },
                         { name: 'Цена последней сделки', value: 'LAST' }, { name: 'Изменение цены', value: 'CHANGE' }]}
             />
-            <Switch checked={exchangeState.sort.isDescending} onChange={() => updateExchangeState([                    
-                    { name: 'sort', value: { option: exchangeState.sort.option, isDescending: !exchangeState.sort.isDescending } }
-            ])}></Switch>
-            <Input type="text" value={exchangeState.searchQuery} onChange={e => updateExchangeState([{name: 'searchQuery', value: e.target.value}])}></Input>
+            <Switch checked={exchangeState.sort.isDescending} onChange={() => setExchangeState(
+                {...exchangeState, sort: { option: exchangeState.sort.option, isDescending: !exchangeState.sort.isDescending}})}></Switch>
+            <Input type="text" value={exchangeState.searchQuery} onChange={e => setExchangeState({...exchangeState ,searchQuery: e.target.value})}></Input>
             <Select
                 defaultValue="Рынки"
                 value={exchangeState.market}
-                onChange={market => updateExchangeState([
-                    { name: 'market', value: market },
-                    { name: 'board', value:boards[market][0].value}                    
-                ])}
+                onChange={market => setExchangeState({...exchangeState, market, board: boards[market][0].value})}
                 options={markets}
             />
             <Select
                 defaultValue="Режим торгов"
                 value={exchangeState.board}
-                onChange={board => updateExchangeState([{name:'board', value: board}])}
+                onChange={board => setExchangeState({...exchangeState, board})}
                 options={boards[exchangeState.market]}
             />
         </aside>

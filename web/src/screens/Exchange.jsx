@@ -1,8 +1,9 @@
-import React, {useState, useEffect, useContext, useMemo} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { eel } from '../App'
 import SecuritiesList from '../components/SecuritiesList'
 import ExchangeSidebar from '../components/sidebar/ExchangeSidebar'
 import { ExchangeContext } from '../context'
+import { useSecurities } from '../hooks/useSecurities'
 
 
 export default function Exchange() {
@@ -17,32 +18,9 @@ export default function Exchange() {
         return () => {
             clearInterval(id)
         }
-    }, [exchangeState.market, exchangeState.board])
+    }, [exchangeState.market, exchangeState.board])    
 
-    const sortedSecurities = useMemo(() => {        
-        if (exchangeState.sort.option)
-            return [...securities].sort((a, b) => {
-                const descendingCoeff = exchangeState.sort.isDescending ? -1 : 1
-                if (a[exchangeState.sort.option]) {
-                    if (!b[exchangeState.sort.option])
-                        return -1 //if b is null then a must be placed before it 
-                    if ((typeof a[exchangeState.sort.option]) === 'number') {
-                        return (a[exchangeState.sort.option] - b[exchangeState.sort.option]) * descendingCoeff
-                    }
-                    return a[exchangeState.sort.option].localeCompare(b[exchangeState.sort.option]) * descendingCoeff
-                }
-                return 1 //if a is null then it must be placed after b
-            })
-        return securities
-    }, [exchangeState.sort, securities])
-
-    const sortedAndSearchedSecurities = useMemo(() => {
-        return sortedSecurities.filter((sec) => {
-            return sec.SECID.toLowerCase().includes(exchangeState.searchQuery.toLowerCase()) ||
-                sec.SHORTNAME.toLowerCase().includes(exchangeState.searchQuery.toLowerCase()) ||
-                sec.SECNAME.toLowerCase().includes(exchangeState.searchQuery.toLowerCase()) ||
-                sec.LATNAME.toLowerCase().includes(exchangeState.searchQuery.toLowerCase()) })
-    }, [exchangeState.searchQuery, sortedSecurities])
+    const sortedAndSearchedSecurities = useSecurities(securities, exchangeState.sort, exchangeState.searchQuery)
 
     async function setSpecifiedSecurities(market, board) {
         console.log('get')
