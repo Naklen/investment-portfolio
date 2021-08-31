@@ -3,6 +3,7 @@ import Select from '../UI/select/Select'
 import { markets, boards } from '../../utils/moexMarketsAndBoards'
 import { ExchangeContext } from '../../context'
 import Switch from '../UI/switch/Switch'
+import Input from '../UI/input/Input'
 
 export default function ExchangeSidebar() {
     const {exchangeState, updateExchangeState} = useContext(ExchangeContext)
@@ -19,7 +20,8 @@ export default function ExchangeSidebar() {
             />
             <Switch checked={exchangeState.sort.isDescending} onChange={() => updateExchangeState([                    
                     { name: 'sort', value: { option: exchangeState.sort.option, isDescending: !exchangeState.sort.isDescending } }
-                ])}></Switch>
+            ])}></Switch>
+            <Input type="text" value={exchangeState.searchQuery} onChange={e => updateExchangeState([{name: 'searchQuery', value: e.target.value}])}></Input>
             <Select
                 defaultValue="Рынки"
                 value={exchangeState.market}

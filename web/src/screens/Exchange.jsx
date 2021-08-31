@@ -34,7 +34,15 @@ export default function Exchange() {
                 return 1 //if a is null then it must be placed after b
             })
         return securities
-    }, [exchangeState, securities])
+    }, [exchangeState.sort, securities])
+
+    const sortedAndSearchedSecurities = useMemo(() => {
+        return sortedSecurities.filter((sec) => {
+            return sec.SECID.toLowerCase().includes(exchangeState.searchQuery.toLowerCase()) ||
+                sec.SHORTNAME.toLowerCase().includes(exchangeState.searchQuery.toLowerCase()) ||
+                sec.SECNAME.toLowerCase().includes(exchangeState.searchQuery.toLowerCase()) ||
+                sec.LATNAME.toLowerCase().includes(exchangeState.searchQuery.toLowerCase()) })
+    }, [exchangeState.searchQuery, sortedSecurities])
 
     async function setSpecifiedSecurities(market, board) {
         console.log('get')
@@ -45,7 +53,7 @@ export default function Exchange() {
         <div className="exchange">
             <h1 className="exchange__title header">Биржа</h1>
             <div className="exchange__body">
-                <SecuritiesList securities={sortedSecurities}></SecuritiesList>
+                <SecuritiesList securities={sortedAndSearchedSecurities}></SecuritiesList>
                 <ExchangeSidebar />
             </div>                
         </div>        

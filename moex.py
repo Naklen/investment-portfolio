@@ -19,7 +19,7 @@ class Moex:
     def get_securities(market, board):
         request_url = f"{stock_markets_url}/{market}/boards/{board}/securities.json"
         arguments = {"securities.columns": (
-            "SECID," "SHORTNAME"), 'marketdata.columns': ('LAST, ' 'CHANGE,' 'LASTTOPREVPRICE')}
+            "SECID, " "SHORTNAME, " "SECNAME, " "LATNAME"), 'marketdata.columns': ('LAST, ' 'CHANGE,' 'LASTTOPREVPRICE')}
         data = make_request(request_url, arguments)
         result = []
         for s, m in zip(data['securities'], data['marketdata']):
