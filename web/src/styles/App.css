@@ -44,7 +44,7 @@
     flex-direction: column;
     margin-right: 1rem;
     border-style: solid;
-    border-width: 2px;
+    border-width: 1px;
     border-image: linear-gradient(transparent 0%, gray 40%, gray 60%, transparent 100%) 0 1 0 0;
     height: 100%;
     width: 15vw;
@@ -123,6 +123,7 @@
     height: 3em;
     align-items: center;
     padding-left: 5px;
+    cursor: pointer;
 }
 
 .securities-list__item:nth-child(2n) {
@@ -169,7 +170,7 @@
 
 .security__change_positive,
 .security__change-percent_positive {
-    color: rgb(15, 166, 108);
+    color: #0fa66c;
 }
 
 .security__change_negative,
@@ -270,4 +271,11 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    padding-right: 10px;
+}
+
+.sort-block {
+    display: flex;
+    align-items: center;
+    overflow:visible;
 }

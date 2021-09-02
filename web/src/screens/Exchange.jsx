@@ -14,7 +14,7 @@ export default function Exchange() {
         setSpecifiedSecurities(exchangeState.market, exchangeState.board)
         const id = setInterval(() => {            
             setSpecifiedSecurities(exchangeState.market, exchangeState.board)
-        }, 60*1000)
+        }, 60*60*1000)
         return () => {
             clearInterval(id)
         }

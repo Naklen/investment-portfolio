@@ -1,0 +1,132 @@
+.select {
+    border: none;
+    border-bottom: 2px solid #969696;
+    font-size: 1rem;
+    padding: 0;
+    width: 100%;
+    height: 2rem;
+    position: relative;
+    overflow: visible;
+    color: #969696;
+    margin: 1rem 0;
+    cursor: pointer;
+}
+
+.select:focus {
+    border-bottom: 2px solid #0fa66c;
+    outline: none;
+}
+
+.options {
+    position: absolute;
+    left: 0;
+    top: 2rem;
+    border: 0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+    width: 100%;
+}
+
+.select:focus .options {
+    border-bottom: 1px solid #0fa66c;
+}
+
+.option {
+    height: 0;
+    overflow: hidden;
+    padding-left: 5px;
+    width: 100%;    
+}
+
+.select:focus .option {
+    max-height: unset;
+    height: 1.2rem;
+    transition: 0.4s;    
+}
+
+.select:focus .option__label {
+   width: 100%;
+   display: block;
+}
+
+.select:focus .option:hover {
+    padding-left: 10px;
+}
+
+.select:focus .option_selected {
+    color: #0fa66c;
+}
+
+.radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
+.name {
+    position: absolute;
+    left: 0;
+    bottom: 0.2rem;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.option-selected .name {
+    bottom: 1.2rem;
+}
+
+.select:focus .name {
+    color: #0fa66c;
+    font-weight: 700;
+}
+
+.displayed-option {
+    position: absolute;
+    left: 0;
+    bottom: 0.2rem;
+    color: black;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.displayed-option::after {
+    position: absolute;
+    width: 1rem;
+    height: 100%;
+    content: "";
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+    top: 0;
+    right: 0;
+}
+
+.clear-button__label {
+    width: 1.4rem;
+    height: 1.4rem;
+    position: absolute;
+    right: 1rem;
+    top: -0.6rem;
+    z-index: 90;
+    display: block;
+}
+
+.clear-button__label:hover {
+    color: crimson;
+    transition: 0.2s;
+}
+
+.cross {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

@@ -12,7 +12,7 @@ export default function Security() {
         setSpecifiedSecurity(market, board, secid)
         const id = setInterval(() => {
             setSpecifiedSecurity(market, board, secid)
-        }, 60*1000)
+        }, 60*60*1000)
         return () => {
             clearInterval(id)
         }

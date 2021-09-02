@@ -1,0 +1,49 @@
+.input {
+  position: relative;
+  padding: 15px 0 0;
+  margin: 1rem 0;  
+}
+
+.input__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #969696;
+  outline: 0;
+  font-size: 1rem;
+  color: #000;
+  padding: 0.1rem 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+.input__field::placeholder {
+  color: transparent;
+}
+.input__field:placeholder-shown ~ .input__label {
+  font-size: 1rem;
+  cursor: text;
+  bottom: 0.2rem;
+}
+
+.input__label {
+  position: absolute;
+  bottom: 1.2rem;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #969696;
+}
+
+.input__field:focus {
+  /* padding-bottom: 6px; */
+  border-bottom: 2px solid #0fa66c;
+}
+.input__field:focus ~ .input__label {
+  position: absolute;
+  bottom: 1.2rem;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #0fa66c;
+  font-weight: 700;
+}

@@ -9,24 +9,31 @@ export default function ExchangeSidebar() {
     const {exchangeState, setExchangeState} = useContext(ExchangeContext)
     return (
         <aside className="exchange-sidebar">
-            <Select
-                defaultValue="Сортировка"
+            <h3>Сортировка и поиск</h3>
+            <div className="sort-block">
+                <Select
+                selectName="Сортировка"
                 value={exchangeState.sort.option}
                 onChange={option => setExchangeState({...exchangeState, sort: {option, isDescending: exchangeState.sort.isDescending}})}
                 options={[{ name: 'Тикер', value: 'SECID' }, { name: 'Название', value: 'SHORTNAME' },
-                        { name: 'Цена последней сделки', value: 'LAST' }, { name: 'Изменение цены', value: 'CHANGE' }]}
+                    { name: 'Цена последней сделки', value: 'LAST' }, { name: 'Изменение цены', value: 'CHANGE' }]}
+                cleanable
             />
             <Switch checked={exchangeState.sort.isDescending} onChange={() => setExchangeState(
                 {...exchangeState, sort: { option: exchangeState.sort.option, isDescending: !exchangeState.sort.isDescending}})}></Switch>
-            <Input type="text" value={exchangeState.searchQuery} onChange={e => setExchangeState({...exchangeState ,searchQuery: e.target.value})}></Input>
+            </div>
+            <Input id="search" placeholder="Поиск" type="text" value={exchangeState.searchQuery}
+                onChange={e => setExchangeState({ ...exchangeState, searchQuery: e.target.value })}>                
+            </Input>            
+            <h3>Выбор ценных бумаг</h3>
             <Select
-                defaultValue="Рынки"
+                selectName="Рынки"
                 value={exchangeState.market}
                 onChange={market => setExchangeState({...exchangeState, market, board: boards[market][0].value})}
                 options={markets}
             />
             <Select
-                defaultValue="Режим торгов"
+                selectName="Режим торгов"
                 value={exchangeState.board}
                 onChange={board => setExchangeState({...exchangeState, board})}
                 options={boards[exchangeState.market]}
