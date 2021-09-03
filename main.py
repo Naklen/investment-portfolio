@@ -3,6 +3,7 @@ import asyncio
 import sys
 import platform
 from moex import Moex
+from models import *
 
 sys.path.insert(1, '../../')
 
@@ -18,7 +19,24 @@ def get_securities_changing_fields_list(market, board):
 def get_security_data(market, board, secid):
     return Moex.get_security(market, board, secid)
 
-def main(develop):    
+@eel.expose
+def create_user(name, password):
+    with db:
+        User.create(name=name, password=password)        
+
+@eel.expose
+def get_all_users():
+    with db:
+        return User.select()
+
+
+
+
+def main(develop):
+    with db:
+        if len(User) == 0:
+            User(name='User', password='').save()
+
     if develop:
         print('DEVELOP MODE')
         directory = './web/src'       
