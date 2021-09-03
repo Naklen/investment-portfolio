@@ -5,17 +5,21 @@ import Exchange from './screens/Exchange.jsx'
 import Portfolio from './screens/Portfolio.jsx'
 import Security from "./screens/Security.jsx";
 import './styles/App.css'
-import { ExchangeContext } from './context'
+import { Context } from './context'
 
 export const eel = window.eel
 eel.set_host('ws://localhost:8080')
 
 function App() {
-  const [exchangeState, setExchangeState] = useState({ market: 'shares', board: 'tqbr', sort: { option: '', isDescending: false }, searchQuery: '' })  
+  const [exchangeState, setExchangeState] = useState({ market: 'shares', board: 'tqbr', sort: { option: '', isDescending: false }, searchQuery: '' })
+  const [user, setUser] = useState({})
+  eel.get_logged_in_user()().then((res) => setUser(res))
   return (
-    <ExchangeContext.Provider value={{
+    <Context.Provider value={{
       exchangeState,
-      setExchangeState
+      setExchangeState,
+      user,
+      setUser
       }}>
       <main className="main">    
         <BrowserRouter>        
@@ -36,7 +40,7 @@ function App() {
           </div>                      
         </BrowserRouter>    
       </main>
-    </ExchangeContext.Provider>
+    </Context.Provider>
   );
 }
 

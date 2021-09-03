@@ -2,8 +2,11 @@ import eel
 import asyncio
 import sys
 import platform
+from datetime import datetime
 from moex import Moex
 from models import *
+from playhouse.shortcuts import model_to_dict
+from hashgen import generate_hash
 
 sys.path.insert(1, '../../')
 
@@ -22,12 +25,33 @@ def get_security_data(market, board, secid):
 @eel.expose
 def create_user(name, password):
     with db:
-        User.create(name=name, password=password)        
+        User.create(name=name, password_hash=password, is_logged_in=False)
 
 @eel.expose
-def get_all_users():
+def get_logged_in_user():    
+    with db:       
+        return model_to_dict(User.get(User.is_logged_in == True))
+
+@eel.expose
+def try_log_in_user(name, password = ''):
     with db:
-        return User.select()
+        prev_user = User.get(User.is_logged_in == True)
+        try:
+            logging_user = User.get(User.name == name)
+        except DoesNotExist:
+            return 2
+        else:
+            if logging_user.password_hash == '' or logging_user.password_hash == generate_hash(password):
+                prev_user.is_logged_in = False
+                prev_user.save()
+                logging_user.is_logged_in = True
+                logging_user.save()
+                return 0
+            else:
+                return 1
+
+
+
 
 
 
@@ -35,7 +59,7 @@ def get_all_users():
 def main(develop):
     with db:
         if len(User) == 0:
-            User(name='User', password='').save()
+            User(name='User', password_hash='', is_logged_in=True).save()
 
     if develop:
         print('DEVELOP MODE')

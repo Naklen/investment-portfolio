@@ -13,14 +13,15 @@ class BaseModel(Model):
         order_by = id
 
 class User(BaseModel):    
-    name = CharField()
-    password = CharField()
+    name = CharField(unique=True)
+    password_hash = CharField()
+    is_logged_in = BooleanField()
 
     class Meta:
         db_table = 'users'
 
 class Security(BaseModel):
-    secid = CharField()
+    secid = CharField(unique=True)
     market = CharField()
     board = CharField()
 
@@ -38,7 +39,7 @@ class Transaction(BaseModel):
     user_id = ForeignKeyField(User)
     security_id = ForeignKeyField(Security)
     is_buy = BooleanField()
-    datetime = DateTimeField()
+    datetime = CharField()
     security_count = IntegerField()
 
     class Meta:

@@ -1,19 +1,17 @@
 import React, {useState} from 'react'
 import { eel } from '../App'
 
-export default function Portfolio() {
-    const [state, setstate] = useState('')
+export default function Portfolio() {    
 
-    async function insertJSON() {        
-        let newState = await eel.get_json()()
-        console.log(newState)
-        setstate(newState)
+    function insertJSON() {        
+        eel.get_logged_in_user({a: 'a', b: 'b'})().then((res) => console.log(res))
     }
     return (
         <div>
-            <h1>Портфель</h1>
-            <button onClick={insertJSON}>Жми</button>
-            <p>{state}</p>
+            <h1 className="header">Портфель</h1>
+            <div className="portfolio__body">
+                <button onClick={insertJSON}>abc</button>
+            </div>
         </div>
     )
 }

@@ -28,6 +28,14 @@
 
 .header {
     margin: 10px 0 10px 0;
+    height: 50px;
+    position: fixed;
+    top: 0;    
+    background-color: white;
+    width: 80%; /*otherwise it overrides the scroll*/
+    z-index: 100;
+    margin-top: 0;
+    padding-top: 10px;
 }
 
 .screen-layout {
@@ -89,17 +97,6 @@
 .exchange {
     position: relative;
     width: 100%;
-}
-
-.exchange__title {
-    position: fixed;
-    top: 0;
-    height: 50px;
-    background-color: white;
-    width: 80%; /*otherwise it overrides the scroll*/
-    z-index: 100;
-    margin-top: 0;
-    padding-top: 10px;
 }
 
 .exchange__body {
@@ -278,4 +275,13 @@
     display: flex;
     align-items: center;
     overflow:visible;
+}
+
+
+.portfolio__body {
+    margin-top: 50px;
+    width: 100%;
+    display: grid;
+    grid-template: 'securities-list sidebar' 1fr
+                    / 80% 20%;
 }
