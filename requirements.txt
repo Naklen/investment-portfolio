@@ -10,6 +10,7 @@ gevent==21.8.0
 gevent-websocket==0.10.1
 greenlet==1.1.1
 idna==3.2
+peewee==3.14.4
 pycparser==2.20
 pyparsing==2.4.7
 requests==2.26.0
