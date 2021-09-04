@@ -1,0 +1,26 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+.content {
+    padding: 1rem;
+    background-color: white;
+    min-width: 250px;
+    border-radius: 5px;
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.active{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

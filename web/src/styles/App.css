@@ -87,6 +87,11 @@
     margin-right: 5px;
 }
 
+.navmenu__header span:hover {
+    transition: 0.2s;
+    color: #0fa66c;
+}
+
 
 .screen {
     flex-grow: 1;
@@ -191,6 +196,10 @@
 }
 
 
+.security-screen__title {
+    position: relative;
+}
+
 .security-screen__board {
     color: #969696;
     font-size: 0.9em;
@@ -261,7 +270,7 @@
 }
 
 
-.exchange-sidebar {    
+.sidebar {    
     position: fixed;
     right: 17px;
     width: calc(((85vw - 1rem) * 0.2) - 17px); /*20% of securities-list`s width minus scroll`s width*/

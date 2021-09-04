@@ -35,3 +35,19 @@ export const useSecurities = (securities, sort, searchQuery) => {
 
     return sortedAndSearchedSecurities;
 }
+
+export const useSortedByMarketAndBoardSecurities = (securitiesFromDB) => {
+    const sortedByMarketAndBoardSecurities = useMemo(() => {
+        let s = {};
+        for (let userSec of securitiesFromDB) {
+            let sec = userSec.security
+            if (!s.hasOwnProperty(sec.market))
+                s[sec.market] = {};
+            if (!s[sec.market].hasOwnProperty(sec.board))
+                s[sec.market][sec.board] = [];
+            s[sec.market][sec.board].push(sec.secid);
+        }
+        return s;
+    }, [securitiesFromDB]);    
+    return sortedByMarketAndBoardSecurities;
+}

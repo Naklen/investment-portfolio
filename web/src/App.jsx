@@ -6,6 +6,7 @@ import Portfolio from './screens/Portfolio.jsx'
 import Security from "./screens/Security.jsx";
 import './styles/App.css'
 import { Context } from './context'
+import LoginModal from "./components/LoginModal.jsx";
 
 export const eel = window.eel
 eel.set_host('ws://localhost:8080')
@@ -13,17 +14,23 @@ eel.set_host('ws://localhost:8080')
 function App() {
   const [exchangeState, setExchangeState] = useState({ market: 'shares', board: 'tqbr', sort: { option: '', isDescending: false }, searchQuery: '' })
   const [user, setUser] = useState({})
-  eel.get_logged_in_user()().then((res) => setUser(res))
+  const [portfolioSortAndFilter, setPortfolioSortAndFilter] = useState({ sort: { option: '', isDescending: false }, searchQuery: '' })
+  const [loginModalVisible, setLoginModalVisible] = useState(false)
+  
   return (
     <Context.Provider value={{
       exchangeState,
       setExchangeState,
       user,
-      setUser
+      setUser,
+      portfolioSortAndFilter,
+      setPortfolioSortAndFilter,
+      loginModalVisible,
+      setLoginModalVisible
       }}>
       <main className="main">    
         <BrowserRouter>        
-          <Navmenu/>
+          <Navmenu setLoginModalVisible={setLoginModalVisible}/>
           <div className="screen-layout">
             <div className="navmenu-fake"/>
             <div className="screen">
@@ -37,7 +44,8 @@ function App() {
                 <Security/>
               </Route>
             </div>
-          </div>                      
+          </div>
+          <LoginModal visible={loginModalVisible} setVisible={setLoginModalVisible}></LoginModal>
         </BrowserRouter>    
       </main>
     </Context.Provider>

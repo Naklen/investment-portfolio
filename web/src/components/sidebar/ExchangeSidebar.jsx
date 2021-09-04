@@ -8,7 +8,7 @@ import Input from '../UI/input/Input'
 export default function ExchangeSidebar() {
     const {exchangeState, setExchangeState} = useContext(Context)
     return (
-        <aside className="exchange-sidebar">
+        <aside className="sidebar">
             <h3>Сортировка и поиск</h3>
             <div className="sort-block">
                 <Select

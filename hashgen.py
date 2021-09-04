@@ -1,2 +1,2 @@
 def generate_hash(string):
-    pass #generate hash here
+    return string #not implemented yet///generate hash here

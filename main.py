@@ -25,41 +25,42 @@ def get_security_data(market, board, secid):
 @eel.expose
 def create_user(name, password):
     with db:
-        User.create(name=name, password_hash=password, is_logged_in=False)
-
-@eel.expose
-def get_logged_in_user():    
-    with db:       
-        return model_to_dict(User.get(User.is_logged_in == True))
+        User.create(name=name, password_hash=generate_hash(password))
 
 @eel.expose
 def try_log_in_user(name, password = ''):
-    with db:
-        prev_user = User.get(User.is_logged_in == True)
+    with db:        
         try:
             logging_user = User.get(User.name == name)
         except DoesNotExist:
-            return 2
+            return {'error': 'user does not exist'}
         else:
-            if logging_user.password_hash == '' or logging_user.password_hash == generate_hash(password):
-                prev_user.is_logged_in = False
-                prev_user.save()
-                logging_user.is_logged_in = True
-                logging_user.save()
-                return 0
+            if logging_user.password_hash == '' or logging_user.password_hash == generate_hash(password):                
+                return model_to_dict(logging_user)
             else:
-                return 1
+                return {'error': 'password dont match'}
 
+@eel.expose
+def get_user_securities(user_id):
+    with db:
+        user_securities = (UserSecurity.select(UserSecurity, User, Security)
+                           .join(User, on=(UserSecurity.user == User.id))
+                           .join(Security, on=(UserSecurity.security == Security.id))
+                           .where(User.id == user_id))
+        result = []
+        for security in user_securities:
+            result.append(model_to_dict(security))
+        return result
 
-
-
-
+@eel.expose
+def get_required_securities_list(market, board, required_securities):
+    return Moex.get_required_securities(market, board, required_securities)
 
 
 def main(develop):
     with db:
         if len(User) == 0:
-            User(name='User', password_hash='', is_logged_in=True).save()
+            User(name='User', password_hash='').save()
 
     if develop:
         print('DEVELOP MODE')

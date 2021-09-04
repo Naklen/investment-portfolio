@@ -16,10 +16,11 @@ def make_request(request_url, arguments):
 stock_markets_url = 'https://iss.moex.com/iss/engines/stock/markets'
 
 class Moex:
-    def get_securities(market, board):
+    def get_securities(market, board, arguments={}):
         request_url = f"{stock_markets_url}/{market}/boards/{board}/securities.json"
-        arguments = {"securities.columns": (
-            "SECID, " "SHORTNAME, " "SECNAME, " "LATNAME"), 'marketdata.columns': ('LAST, ' 'CHANGE,' 'LASTTOPREVPRICE')}
+        if arguments == {}:
+            arguments = {"securities.columns": (
+                "SECID," "SHORTNAME," "SECNAME," "LATNAME"), 'marketdata.columns': ('LAST,' 'CHANGE,' 'LASTTOPREVPRICE')}
         data = make_request(request_url, arguments)
         result = []
         for s, m in zip(data['securities'], data['marketdata']):
@@ -38,3 +39,11 @@ class Moex:
         request_url = f"{stock_markets_url}/{market}/boards/{board}/securities/{secid}.json"
         data = make_request(request_url, {})        
         return {**data['securities'][0], **data['marketdata'][0]}
+
+
+    def get_required_securities(market, board, required_securities):        
+        arguments = {"securities.columns": (
+            "SECID," "SHORTNAME," "SECNAME," "LATNAME," 'SECTYPE'), 
+            'marketdata.columns': ('LAST,' 'CHANGE,' 'LASTTOPREVPRICE'),
+            'securities': ','.join(required_securities)}
+        return Moex.get_securities(market, board, arguments)
