@@ -87,6 +87,11 @@
     margin-right: 5px;
 }
 
+.navmenu__header {
+    margin-bottom: 50px;
+    padding-left: 10px;
+}
+
 .navmenu__header span:hover {
     transition: 0.2s;
     color: #0fa66c;
@@ -139,6 +144,10 @@
 .security__name {
     padding-left: 20px;
     flex-grow: 10;
+}
+
+.securities-list__item:hover .security__name {    
+    color: #0fa66c;
 }
 
 .security__price-block {
@@ -287,10 +296,49 @@
 }
 
 
+.portfolio{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
 .portfolio__body {
     margin-top: 50px;
     width: 100%;
     display: grid;
     grid-template: 'securities-list sidebar' 1fr
                     / 80% 20%;
+}
+
+.portfolio__no-logged-in-user {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.portfolio__no-logged-in-user span {    
+    font-weight: bold;
+}
+
+.portfolio__no-logged-in-user span:hover {
+    color: #0fa66c;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.user-have{
+    display: flex;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.user-have__count{
+    color: #969696;
+    font-size: small;
+    margin-right: 1rem;
 }

@@ -39,15 +39,36 @@ export const useSecurities = (securities, sort, searchQuery) => {
 export const useSortedByMarketAndBoardSecurities = (securitiesFromDB) => {
     const sortedByMarketAndBoardSecurities = useMemo(() => {
         let s = {};
-        for (let userSec of securitiesFromDB) {
-            let sec = userSec.security
+        for (let userSec of securitiesFromDB) {            
+            let sec = userSec.security            
             if (!s.hasOwnProperty(sec.market))
                 s[sec.market] = {};
             if (!s[sec.market].hasOwnProperty(sec.board))
                 s[sec.market][sec.board] = [];
-            s[sec.market][sec.board].push(sec.secid);
+            s[sec.market][sec.board].push({tiker: sec.secid, count: userSec.count});
         }
         return s;
     }, [securitiesFromDB]);    
     return sortedByMarketAndBoardSecurities;
+}
+
+export const useMarket = (securities, marketName) => {
+    const market = useMemo(() => {
+        if (securities.length !== 0)
+            return securities.filter(sec => sec.market === marketName);
+        else return []
+    }, [securities, marketName]);
+    return market;
+}
+
+export const useShares = (securities) => {
+    return useMarket(securities, 'shares');
+}
+
+export const useBonds = (securities) => {
+    return useMarket(securities, 'bonds');
+}
+
+export const useForeignShares = (securities) => {
+    return useMarket(securities, 'foreignShares');
 }

@@ -9,6 +9,7 @@
 button:hover {
     color: #0fa66c;
     transition: .4s ease-in-out;
+    cursor: pointer;
 }
 
 .button::before{
@@ -43,4 +44,15 @@ button:hover {
 .button:hover::after{
    width: 50%;
    background-color: #0fa66c;
+}
+
+.dangerous:hover {
+    color: crimson;    
+}
+
+.dangerous::before,
+.dangerous::after,
+.dangerous:hover::before,
+.dangerous:hover::after {  
+   background-color: crimson;   
 }

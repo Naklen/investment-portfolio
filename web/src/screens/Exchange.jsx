@@ -4,6 +4,7 @@ import SecuritiesList from '../components/SecuritiesList'
 import ExchangeSidebar from '../components/sidebar/ExchangeSidebar'
 import { Context } from '../context'
 import { useSecurities } from '../hooks/useSecurities'
+import { screenTypes } from '../utils/securitiesListTypes'
 
 
 export default function Exchange() {
@@ -31,7 +32,7 @@ export default function Exchange() {
         <div className="exchange">
             <h1 className="header">Биржа</h1>
             <div className="exchange__body">
-                <SecuritiesList securities={sortedAndSearchedSecurities}></SecuritiesList>
+                <SecuritiesList listType={exchangeState.market} screenType={screenTypes.exchange} securities={sortedAndSearchedSecurities}></SecuritiesList>
                 <ExchangeSidebar />
             </div>                
         </div>        

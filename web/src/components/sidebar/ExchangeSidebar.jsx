@@ -11,7 +11,7 @@ export default function ExchangeSidebar() {
         <aside className="sidebar">
             <h3>Сортировка и поиск</h3>
             <div className="sort-block">
-                <Select
+            <Select
                 selectName="Сортировка"
                 value={exchangeState.sort.option}
                 onChange={option => setExchangeState(prevExchangeState => ({...prevExchangeState, sort: {option, isDescending: exchangeState.sort.isDescending}}))}

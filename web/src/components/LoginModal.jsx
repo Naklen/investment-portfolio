@@ -10,8 +10,7 @@ export default function LoginModal({visible, setVisible}) {
     const [loginForm, setLoginForm] = useState({ name: '', password: '' })
     const logIn = async (e) => {
         e.preventDefault()
-        const newUser = await eel.try_log_in_user(loginForm.name, loginForm.password)()
-        console.log(newUser)
+        const newUser = await eel.try_log_in_user(loginForm.name, loginForm.password)()        
         if (newUser.hasOwnProperty('name')) {
             setUser(newUser)
             setVisible(false)

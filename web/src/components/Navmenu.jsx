@@ -4,9 +4,10 @@ import MoneyIcon from './icons/MoneyIcon'
 import SuitcaseIcon from './icons/SuitcaseIcon'
 import NavmenuItem from './NavmenuItem'
 import { Context } from '../context'
+import Button from './UI/Button/Button'
 
 export default function Navmenu({setLoginModalVisible}) {
-    const {user} = useContext(Context)
+    const {user, setUser} = useContext(Context)
     
     const location = useLocation()
     console.log('nav')
@@ -16,11 +17,12 @@ export default function Navmenu({setLoginModalVisible}) {
           Object.keys(user).length === 0
             ?
             <header className='navmenu__header'>
-            <button onClick={() => setLoginModalVisible(true)}>Войти</button>
+            <Button onClick={() => setLoginModalVisible(true)}>Войти</Button>
             </header>
             :
             <header className='navmenu__header'>
-            Пользователь: <span title='Нажмите, чтобы сменить пользователя' onClick={() => setLoginModalVisible(true)}>{user.name}</span>
+              Пользователь: <span title='Нажмите, чтобы сменить пользователя' onClick={() => setLoginModalVisible(true)}>{user.name}</span>
+              <Button isDangerous={true} onClick={e => setUser({})}>Выйти</Button>
             </header>
         }
           <NavmenuItem toLocation="/Portfolio" currentLocation={location.pathname} Icon={SuitcaseIcon}>Портфель</NavmenuItem>

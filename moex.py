@@ -43,7 +43,7 @@ class Moex:
 
     def get_required_securities(market, board, required_securities):        
         arguments = {"securities.columns": (
-            "SECID," "SHORTNAME," "SECNAME," "LATNAME," 'SECTYPE'), 
+            "SECID," "SHORTNAME," "SECNAME," "LATNAME"), 
             'marketdata.columns': ('LAST,' 'CHANGE,' 'LASTTOPREVPRICE'),
             'securities': ','.join(required_securities)}
         return Moex.get_securities(market, board, arguments)
