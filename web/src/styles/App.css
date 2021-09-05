@@ -218,7 +218,7 @@
 .security-screen__trade-info {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 }
 
 .security-screen__price-block {
@@ -319,6 +319,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: large;
 }
 
 .portfolio__no-logged-in-user span {    
@@ -341,4 +342,44 @@
     color: #969696;
     font-size: small;
     margin-right: 1rem;
+}
+
+.user-security-count {
+    display: flex;    
+    align-items: center;
+    height: 4rem;
+    overflow: hidden;
+    font-size: large;
+}
+
+.user-security-count span{
+    font-size: larger;    
+}
+
+.user-security-count > *{
+    margin-right: 1rem;
+}
+
+.user-security__add-count {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 5px;
+}
+
+.user-security-count__minus-button,
+.user-security-count__plus-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+    color: crimson;
+    margin-bottom: 1.2rem;
+}
+
+.user-security-count__plus-button {
+    color: #0fa66c;
 }

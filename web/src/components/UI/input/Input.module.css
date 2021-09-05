@@ -1,7 +1,7 @@
 .input {
   position: relative;
   padding: 15px 0 0;
-  margin: 1rem 0;  
+  margin: 1rem 0;
 }
 
 .input__field {
@@ -46,4 +46,25 @@
   font-size: 1rem;
   color: #0fa66c;
   font-weight: 700;
+}
+
+.dangerous,
+.dangerous:focus {
+  border-bottom: 2px solid crimson;
+}
+.dangerous ~ .input__label,
+.dangerous:focus ~ .input__label {  
+  color: crimson;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

@@ -24,10 +24,10 @@ export default function LoginModal({visible, setVisible}) {
         <Modal visible={visible} setVisible={setVisible}>
             <form>
                 <h2>Вход</h2>
-                <Input id="loginName" placeholder="Логин" type="text" value={loginForm.value}
+                <Input autocomplete="off" id="loginName" placeholder="Логин" type="text" value={loginForm.value}
                     onChange={e => setLoginForm({ ...loginForm, name: e.target.value })}>                
                 </Input>
-                <Input id="loginPass" placeholder="Пароль" type="text" value={loginForm.password}
+                <Input autocomplete="off" id="loginPass" placeholder="Пароль" type="password" value={loginForm.password}
                     onChange={e => setLoginForm({ ...loginForm, password: e.target.value })}>                
                 </Input>
                 <Button onClick={e => logIn(e)}>Войти</Button>

@@ -8,7 +8,7 @@
 
 button:hover {
     color: #0fa66c;
-    transition: .4s ease-in-out;
+    transition: .2s ease-in-out;
     cursor: pointer;
 }
 
@@ -19,7 +19,7 @@ button:hover {
    height: 2px;
    width: 0;
    background-color: #0fa66c;
-   transition: width .4s ease-in-out, left .4s ease-in-out;
+   transition: width .2s ease-in-out, left .2s ease-in-out;
    left: 50%;
    bottom: 0;
 }
@@ -31,7 +31,7 @@ button:hover {
    height: 2px;
    width: 0;
    background-color: #0fa66c;
-   transition: width .4s ease-in-out;
+   transition: width .2s ease-in-out;
    left: 50%;
    bottom: 0;
 }

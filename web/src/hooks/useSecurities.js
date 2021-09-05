@@ -70,5 +70,5 @@ export const useBonds = (securities) => {
 }
 
 export const useForeignShares = (securities) => {
-    return useMarket(securities, 'foreignShares');
+    return useMarket(securities, 'foreignshares');
 }

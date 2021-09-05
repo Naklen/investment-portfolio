@@ -22,7 +22,7 @@ export default function ExchangeSidebar() {
             <Switch checked={exchangeState.sort.isDescending} onChange={() => setExchangeState(
                 {...exchangeState, sort: { option: exchangeState.sort.option, isDescending: !exchangeState.sort.isDescending}})}></Switch>
             </div>
-            <Input id="search" placeholder="Поиск" type="text" value={exchangeState.searchQuery}
+            <Input autocomplete="off" id="search" placeholder="Поиск" type="text" value={exchangeState.searchQuery}
                 onChange={e => setExchangeState({ ...exchangeState, searchQuery: e.target.value })}>                
             </Input>            
             <h3>Выбор ценных бумаг</h3>

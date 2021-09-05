@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react'
 import { eel } from '../App'
-import SecuritiesList from '../components/SecuritiesList'
+import PortfolioMarket from '../components/portfolioMarket/PortfolioMarket'
 import PortfolioSidebar from '../components/sidebar/PortfolioSidebar'
 import { Context } from '../context'
 import { useShares, useSecurities, useBonds, useForeignShares, useSortedByMarketAndBoardSecurities } from '../hooks/useSecurities'
@@ -27,7 +27,9 @@ export default function Portfolio() {
                         return {
                             ...sec,
                             market: mkey,
-                            count: bvalue.find(bv => bv.tiker === sec.SECID.toLowerCase()).count
+                            board: bkey,
+                            count: bvalue.find(bv => bv.tiker === sec.SECID.toLowerCase()).count,
+                            total: bvalue.find(bv => bv.tiker === sec.SECID.toLowerCase()).count * sec.LAST
                         }
                     })]
                 }            
@@ -69,30 +71,32 @@ export default function Portfolio() {
                             </div>
                             :
                             <div className="portfolio__body">
-                                {
-                                    shares.length !== 0 &&
-                                    <div className="portfolio__market">
-                                        <br />
-                                        <h2>Акции</h2>                                        
-                                            <SecuritiesList screenType={screenTypes.portfolio} listType={exchangeTypes.shares} securities={shares}/>
-                                    </div>
-                                }
-                                {
-                                    bonds.length !== 0 &&
-                                    <div className="portfolio__market">
-                                        <br />
-                                        <h2>Облигации</h2>                                        
-                                        <SecuritiesList screenType={screenTypes.portfolio} listType={exchangeTypes.shares} securities={bonds}/>
-                                    </div>
-                                }
-                                {
-                                    foreignShares.length !== 0 &&
-                                    <div className="portfolio__market">
-                                        <br />
-                                        <h2>Иностранные акции</h2>                                        
-                                        <SecuritiesList screenType={screenTypes.portfolio} listType={exchangeTypes.shares} securities={foreignShares}/>
-                                    </div>
-                                }
+                                <div className="portfolio__lists">
+                                    {
+                                        shares.length !== 0 &&
+                                            <PortfolioMarket
+                                                screenType={screenTypes.portfolio}
+                                                listType={exchangeTypes.shares}
+                                                securities={shares}
+                                                title='Акции' />
+                                    }
+                                    {
+                                        bonds.length !== 0 &&
+                                        <PortfolioMarket
+                                                screenType={screenTypes.portfolio}
+                                                listType={exchangeTypes.bonds}
+                                                securities={bonds}
+                                                title='Облигации' />
+                                    }
+                                    {
+                                        foreignShares.length !== 0 &&
+                                        <PortfolioMarket
+                                                screenType={screenTypes.portfolio}
+                                                listType={exchangeTypes.foreignShares}
+                                                securities={foreignShares}
+                                                title='Иностранные ценные бумаги' />
+                                    }
+                                </div>
                                 <PortfolioSidebar/>
                             </div>                        
                         }                        
