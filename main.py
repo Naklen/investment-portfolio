@@ -97,14 +97,24 @@ def add_or_delete_security_to_user(user_id, security_params, is_buy, datetime):
         user_security.save()
         if user_security.count == 0:
             UserSecurity.delete().where(UserSecurity.id == user_security.id).execute()
-        Transaction.create(
-            user=user,
-            security=security,
-            is_buy=is_buy,
-            datetime=datetime,
-            price=security_params['price'],
-            security_count=security_params['count']
-        )
+        if security_params['price'] is None:
+            Transaction.create(
+                user=user,
+                security=security,
+                is_buy=is_buy,
+                datetime=datetime,
+                price=0,
+                security_count=security_params['count']
+            )
+        else:
+            Transaction.create(
+                user=user,
+                security=security,
+                is_buy=is_buy,
+                datetime=datetime,
+                price=security_params['price'],
+                security_count=security_params['count']
+            )
 
 
 def main(develop):
