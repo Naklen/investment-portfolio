@@ -7,6 +7,7 @@ import Security from "./screens/Security.jsx";
 import './styles/App.css'
 import { Context } from './context'
 import LoginModal from "./components/LoginModal.jsx";
+import NewUserModal from "./components/NewUserModal.jsx";
 
 export const eel = window.eel
 eel.set_host('ws://localhost:8080')
@@ -16,6 +17,7 @@ function App() {
   const [user, setUser] = useState({})
   const [portfolioSortAndFilter, setPortfolioSortAndFilter] = useState({ sort: { option: '', isDescending: false }, searchQuery: '' })
   const [loginModalVisible, setLoginModalVisible] = useState(false)
+  const [newUserModalVisible, setNewUserModalVisible] = useState(false)
   
   return (
     <Context.Provider value={{
@@ -26,11 +28,13 @@ function App() {
       portfolioSortAndFilter,
       setPortfolioSortAndFilter,
       loginModalVisible,
-      setLoginModalVisible
+      setLoginModalVisible,
+      newUserModalVisible,
+      setNewUserModalVisible
       }}>
       <main className="main">    
         <BrowserRouter>        
-          <Navmenu setLoginModalVisible={setLoginModalVisible}/>
+          <Navmenu setLoginModalVisible={setLoginModalVisible} setNewUserModalVisible={setNewUserModalVisible}/>
           <div className="screen-layout">
             <div className="navmenu-fake"/>
             <div className="screen">
@@ -46,6 +50,7 @@ function App() {
             </div>
           </div>
           <LoginModal visible={loginModalVisible} setVisible={setLoginModalVisible}></LoginModal>
+          <NewUserModal visible={newUserModalVisible} setVisible={setNewUserModalVisible}></NewUserModal>
         </BrowserRouter>    
       </main>
     </Context.Provider>

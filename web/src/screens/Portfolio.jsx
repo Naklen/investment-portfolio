@@ -1,4 +1,5 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react'
+import { Link } from 'react-router-dom'
 import { eel } from '../App'
 import PortfolioMarket from '../components/portfolioMarket/PortfolioMarket'
 import PortfolioSidebar from '../components/sidebar/PortfolioSidebar'
@@ -9,7 +10,7 @@ import { exchangeTypes, screenTypes } from '../utils/securitiesListTypes'
 export default function Portfolio() {
     const [userSecurities, setUserSecurities] = useState([])    
     const [securitiesFromDB, setSecuritiesFromDB] = useState([])
-    const { user, setLoginModalVisible, portfolioSortAndFilter } = useContext(Context)   
+    const { user, setLoginModalVisible, portfolioSortAndFilter } = useContext(Context)
 
     useEffect(() => {        
         eel.get_user_securities(user.id)().then(res => setSecuritiesFromDB(res))        
@@ -66,8 +67,11 @@ export default function Portfolio() {
                     <div className="portfolio__wrapper">
                         {
                         userSecurities.length === 0 ?
-                            <div className="">
-                                Нема
+                            <div className="portfolio_empty">
+                                Инвестиционный портфель пуст. Добавить ценные бумаги можно на&nbsp;
+                                <Link className="portfolio__exchange-link" to='/Exchange'>            
+                                    бирже
+                                </Link>
                             </div>
                             :
                             <div className="portfolio__body">
@@ -102,7 +106,7 @@ export default function Portfolio() {
                         }                        
                     </div>
                     :
-                    <div className="portfolio__no-logged-in-user">
+                    <div className="portfolio_no-logged-in-user">
                         Чтобы увидеть добавленные ценные бумаги, нужно&nbsp;
                         <span onClick={() => setLoginModalVisible(true)}>войти</span>
                     </div>                    

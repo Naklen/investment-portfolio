@@ -6,9 +6,8 @@ import NavmenuItem from './NavmenuItem'
 import { Context } from '../context'
 import Button from './UI/Button/Button'
 
-export default function Navmenu({setLoginModalVisible}) {
-    const {user, setUser} = useContext(Context)
-    
+export default function Navmenu({setLoginModalVisible, setNewUserModalVisible}) {
+    const {user, setUser} = useContext(Context)    
     const location = useLocation()
     console.log('nav')
     return (
@@ -16,8 +15,9 @@ export default function Navmenu({setLoginModalVisible}) {
         {
           Object.keys(user).length === 0
             ?
-            <header className='navmenu__header'>
-            <Button onClick={() => setLoginModalVisible(true)}>Войти</Button>
+            <header className='navmenu__header_logged-out'>
+              <Button onClick={() => setLoginModalVisible(true)}>Войти</Button>
+              <Button onClick={() => setNewUserModalVisible(true)}>Новый&nbsp;профиль</Button>
             </header>
             :
             <header className='navmenu__header'>

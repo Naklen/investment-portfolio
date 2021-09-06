@@ -27,10 +27,14 @@ def get_required_securities_list(market, board, required_securities):
     return Moex.get_required_securities(market, board, required_securities)
 
 @eel.expose
-def create_user(name, password):
+def try_create_user(name, password):
     with db:
-        new_user = User.create(name=name, password_hash=generate_hash(password))
-        return model_to_dict(new_user)
+        try:
+            new_user = User.create(name=name, password_hash=generate_hash(password))
+        except IntegrityError:
+            return {'error': 'user already exist'}
+        else:
+            return model_to_dict(new_user)
 
 @eel.expose
 def try_log_in_user(name, password = ''):
