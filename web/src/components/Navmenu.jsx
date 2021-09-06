@@ -2,9 +2,10 @@ import React, { useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import MoneyIcon from './icons/MoneyIcon'
 import SuitcaseIcon from './icons/SuitcaseIcon'
+import UserIcon from './icons/UserIcon'
 import NavmenuItem from './NavmenuItem'
 import { Context } from '../context'
-import Button from './UI/Button/Button'
+import Button from './UI/button/Button'
 
 export default function Navmenu({setLoginModalVisible, setNewUserModalVisible}) {
     const {user, setUser} = useContext(Context)    
@@ -27,6 +28,10 @@ export default function Navmenu({setLoginModalVisible, setNewUserModalVisible}) 
         }
           <NavmenuItem toLocation="/Portfolio" currentLocation={location.pathname} Icon={SuitcaseIcon}>Портфель</NavmenuItem>
           <NavmenuItem toLocation="/Exchange" currentLocation={location.pathname} Icon={MoneyIcon}>Биржа</NavmenuItem>
+          {
+            Object.keys(user).length !== 0 &&
+              <NavmenuItem toLocation="/Profile" currentLocation={location.pathname} Icon={UserIcon}>Профиль</NavmenuItem>
+          }
         </nav>
     )
 }

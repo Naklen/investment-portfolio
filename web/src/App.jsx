@@ -8,6 +8,7 @@ import './styles/App.css'
 import { Context } from './context'
 import LoginModal from "./components/LoginModal.jsx";
 import NewUserModal from "./components/NewUserModal.jsx";
+import Profile from "./screens/Profile.jsx";
 
 export const eel = window.eel
 eel.set_host('ws://localhost:8080')
@@ -46,6 +47,9 @@ function App() {
               </Route>
               <Route path="/security/:market/:board/:secid">
                 <Security/>
+              </Route>
+              <Route path="/profile">
+                <Profile/>
               </Route>
             </div>
           </div>

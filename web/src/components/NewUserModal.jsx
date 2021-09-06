@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { eel } from '../App'
 import { Context } from '../context'
-import Button from './UI/Button/Button'
+import Button from './UI/button/Button'
 import Input from './UI/input/Input'
 import Modal from './UI/modal/Modal'
 

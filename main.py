@@ -44,8 +44,8 @@ def try_log_in_user(name, password = ''):
         except DoesNotExist:
             return {'error': 'user does not exist'}
         else:
-            if logging_user.password_hash == '' or logging_user.password_hash == generate_hash(password):                
-                return model_to_dict(logging_user)
+            if logging_user.password_hash == '' or logging_user.password_hash == generate_hash(password):
+                return model_to_dict(logging_user)            
             else:
                 return {'error': 'password dont match'}
 
@@ -98,23 +98,44 @@ def add_or_delete_security_to_user(user_id, security_params, is_buy, datetime):
         if user_security.count == 0:
             UserSecurity.delete().where(UserSecurity.id == user_security.id).execute()
         if security_params['price'] is None:
-            Transaction.create(
-                user=user,
-                security=security,
-                is_buy=is_buy,
-                datetime=datetime,
-                price=0,
-                security_count=security_params['count']
-            )
+            price = 0
         else:
-            Transaction.create(
-                user=user,
-                security=security,
-                is_buy=is_buy,
-                datetime=datetime,
-                price=security_params['price'],
-                security_count=security_params['count']
-            )
+            price = security_params['price']
+        Transaction.create(
+            user=user,
+            security=security,
+            is_buy=is_buy,
+            datetime=datetime,
+            price=price,
+            security_count=security_params['count']
+        )
+
+@eel.expose
+def try_edit_user_name(user_id, new_name):
+    with db:
+        if new_name == '':
+            return {'error': 'empty string'}
+        user = User.get(User.id == user_id)
+        try:
+            user.name = new_name
+            user.save()
+        except IntegrityError:
+            return {'error': 'user already exist'}
+        else:
+            return model_to_dict(user)
+
+
+@eel.expose
+def try_edit_user_password(user_id, prev_password, new_password):
+    with db:
+        user = User.get(User.id == user_id)
+        new_password_hash = generate_hash(new_password)
+        if generate_hash(prev_password) != user.password_hash:
+            return {'error': 'wrong password'}
+        else:
+            user.password_hash = new_password_hash
+            user.save()
+            return model_to_dict(user)
 
 
 def main(develop):
