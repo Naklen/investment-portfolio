@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ChevronIcon from '../icons/ChevronIcon'
 import SecuritiesList from '../SecuritiesList'
 import classes from './PortfolioMarket.module.css'
 
-export default function PortfolioMarket({ screenType, listType, securities, title }) {
-    const [collapsed, setCollapsed] = useState(false)
+export default function PortfolioMarket({ screenType, listType, securities, title, collapsed, setCollapsed }) {    
     const rootClasses = [classes.market]
     if (collapsed)
         rootClasses.push(classes.collapsed)

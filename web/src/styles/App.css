@@ -75,10 +75,16 @@
     text-decoration: none;
     color: inherit;
     font-size: 18px;
+    transition: 0.2s;
+}
+
+.navmenu__item:hover {
+    font-weight: bold;
 }
 
 .navmenu__item_active {
     font-weight: bold;
+    color: #0fa66c;
 }
 
 .navmenu__item-icon {
@@ -115,6 +121,13 @@
 .exchange {
     position: relative;
     width: 100%;
+}
+
+.exchange_loading {
+    
+    width: 100%;
+    height: 100vh;
+    
 }
 
 .exchange__body {
