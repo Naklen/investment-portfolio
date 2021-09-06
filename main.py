@@ -6,7 +6,7 @@ from datetime import datetime
 from moex import Moex
 from models import *
 from playhouse.shortcuts import model_to_dict
-from hashgen import generate_hash
+from hashgen import *
 
 sys.path.insert(1, '../../')
 
@@ -30,7 +30,8 @@ def get_required_securities_list(market, board, required_securities):
 def try_create_user(name, password):
     with db:
         try:
-            new_user = User.create(name=name, password_hash=generate_hash(password))
+            hash_pair = generate_hash_and_salt(password)
+            new_user = User.create(name=name, password_hash=hash_pair['key'], salt=hash_pair['salt'])
         except IntegrityError:
             return {'error': 'user already exist'}
         else:
@@ -43,8 +44,8 @@ def try_log_in_user(name, password = ''):
             logging_user = User.get(User.name == name)
         except DoesNotExist:
             return {'error': 'user does not exist'}
-        else:
-            if logging_user.password_hash == '' or logging_user.password_hash == generate_hash(password):
+        else:            
+            if logging_user.password_hash == '' or logging_user.password_hash == generate_hash(password, logging_user.salt):
                 return model_to_dict(logging_user)            
             else:
                 return {'error': 'password dont match'}
@@ -129,11 +130,12 @@ def try_edit_user_name(user_id, new_name):
 def try_edit_user_password(user_id, prev_password, new_password):
     with db:
         user = User.get(User.id == user_id)
-        new_password_hash = generate_hash(new_password)
-        if generate_hash(prev_password) != user.password_hash:
+        new_hash_pair = generate_hash_and_salt(new_password)
+        if generate_hash(prev_password, user.salt) != user.password_hash:
             return {'error': 'wrong password'}
         else:
-            user.password_hash = new_password_hash
+            user.password_hash = new_hash_pair['key']
+            user.salt = new_hash_pair['salt']
             user.save()
             return model_to_dict(user)
 
@@ -141,7 +143,7 @@ def try_edit_user_password(user_id, prev_password, new_password):
 def main(develop):
     with db:
         if len(User) == 0:
-            User(name='User', password_hash='').save()
+            try_create_user('User', '')            
 
     if develop:
         print('DEVELOP MODE')

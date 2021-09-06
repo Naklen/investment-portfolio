@@ -19,7 +19,7 @@ export default function Portfolio() {
 
     useEffect(() => {
         setIsSecuritiesLoading(true)
-        eel.get_user_securities(user.id)().then(res => setSecuritiesFromDB(res))
+        eel.get_user_securities(user.id)().then(res => { if(res.length === 0) setIsSecuritiesLoading(false); setSecuritiesFromDB(res) })
     }, [user])    
 
     const sortedByMarketAndBoardSecurities = useSortedByMarketAndBoardSecurities(securitiesFromDB)
