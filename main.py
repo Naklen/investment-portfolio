@@ -139,6 +139,29 @@ def try_edit_user_password(user_id, prev_password, new_password):
             user.save()
             return model_to_dict(user)
 
+@eel.expose
+def get_user_transactions_history(user_id):
+    with db:
+        transactions = (Transaction.select(Transaction, User, Security)
+                           .join(User, on=(Transaction.user == User.id))
+                           .join(Security, on=(Transaction.security == Security.id))
+                           .where(User.id == user_id)
+                           .order_by(Transaction.datetime.desc()))
+        result = []
+        for transaction in transactions:
+            result.append(model_to_dict(transaction))
+        return result
+
+@eel.expose
+def delete_transaction(transaction_id):
+    with db:
+        Transaction.delete().where(Transaction.id == transaction_id).execute()
+
+@eel.expose
+def delete_all_transactions(user_id):
+    with db:
+        Transaction.delete().where(Transaction.user == user_id).execute()
+
 
 def main(develop):
     with db:

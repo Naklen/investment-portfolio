@@ -1,0 +1,64 @@
+.transaction {
+    display: flex;
+    align-items: center;    
+    gap: 4rem;
+    border-bottom: 1px #eee solid;
+    font-size: large;
+    position: relative;
+    padding-right: 1.2rem;
+}
+
+.transaction:hover {
+    background-color: #eee;
+}
+
+.transaction * {
+    flex-grow: 1;
+}
+
+.buy {
+    color: #0fa66c;
+}
+
+.sale {
+    color: crimson;
+}
+
+.datetime {
+    font-size: 1rem;
+}
+
+.secid {
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.secid:hover {
+    color: #0fa66c;
+}
+
+.count-price span {
+    font-size: 0.9rem;
+}
+
+.delete {
+    position: absolute;
+    width: 1.2rem;
+    height: 1.2rem;
+    top: 0;
+    right: 0;
+    transition: 0.2s;
+}
+
+.delete:hover {
+    color: crimson;
+}
+
+.icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

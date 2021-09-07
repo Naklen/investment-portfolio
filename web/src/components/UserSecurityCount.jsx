@@ -50,7 +50,7 @@ export default function UserSecurityCount({ market, board, secid, price }) {
         <div className="user-security-count">
             Ценных бумаг в портфеле:&nbsp;<span>{nf(count)}</span>
             <div className="user-security__add-count">
-                <div className="user-security-count__minus-button" onClick={() => removeSecurity()}><MinusIcon></MinusIcon></div>
+                <div title="Убрать" className="user-security-count__minus-button" onClick={() => removeSecurity()}><MinusIcon></MinusIcon></div>
                 <Input isDangerous={danger} autocomplete="off" id="search" placeholder={placeholder} type="number" value={changeCount}
                     onChange={e => {
                         setPlaceholder('Добавить/Удалить')
@@ -64,7 +64,7 @@ export default function UserSecurityCount({ market, board, secid, price }) {
                                 setChangeCount('')
                     }}>
                 </Input>
-                <div className="user-security-count__plus-button" onClick={() => addSecurity()}><PlusIcon></PlusIcon></div>
+                <div title="Добавить" className="user-security-count__plus-button" onClick={() => addSecurity()}><PlusIcon></PlusIcon></div>
             </div>
         </div>
     )

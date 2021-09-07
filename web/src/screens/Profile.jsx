@@ -6,6 +6,7 @@ import SaveIcon from '../components/icons/SaveIcon'
 import Input from '../components/UI/input/Input'
 import { eel } from '../App'
 import Button from '../components/UI/button/Button'
+import TransactionsList from '../components/transactionList/TransactionsList'
 
 export default function Profile() {
     const { user, setUser } = useContext(Context)
@@ -136,7 +137,7 @@ export default function Profile() {
                     </div>
                 </div>
                 <div className="profile__transactions-history">
-
+                    <TransactionsList></TransactionsList>            
                 </div>
             </div>
         </div>

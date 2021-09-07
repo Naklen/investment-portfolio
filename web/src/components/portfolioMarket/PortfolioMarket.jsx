@@ -11,7 +11,7 @@ export default function PortfolioMarket({ screenType, listType, securities, titl
     return (
         <div className={rootClasses.join(' ')}>
             <br />
-            <div title={ collapsed ? 'Развернуть' : 'Свернуть'}className={classes.title} onClick={() => setCollapsed(!collapsed)}>
+            <div title={ collapsed ? 'Развернуть' : 'Свернуть'} className={classes.title} onClick={() => setCollapsed(!collapsed)}>
                 <h2>{title}</h2>
                 <ChevronIcon className={classes.chevron}/>
             </div>

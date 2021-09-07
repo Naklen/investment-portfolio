@@ -15,7 +15,7 @@ export default function SecuritiesListItem({listType, screenType, ...props}) {
         `/security/${props.market}/${props.board}/${props.secid}`
 
     return (
-        <div className="securities-list__item security" onClick={() => router.push(route)}>
+        <div title="На страницу ц/б" className="securities-list__item security" onClick={() => router.push(route)}>
             <div title="Тикер" className="security__secid">{props.secid}</div>
             <strong className="security__name">{props.name}</strong>
             {
