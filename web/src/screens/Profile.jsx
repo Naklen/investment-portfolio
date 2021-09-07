@@ -9,7 +9,7 @@ import Button from '../components/UI/button/Button'
 import TransactionsList from '../components/transactionList/TransactionsList'
 
 export default function Profile() {
-    const { user, setUser } = useContext(Context)
+    const { user, setUser, setDeleteUserModalVisible } = useContext(Context)
     const [nameExpand, setNameExpand] = useState(false)
     const [nameDanger, setNameDanger] = useState(false)
     const [newName, setNewName] = useState('')
@@ -134,6 +134,9 @@ export default function Profile() {
                                 <SaveIcon className="profile__icon profile__save"></SaveIcon>
                             </Button>
                         </form>
+                    </div>
+                    <div className="profile__delete">
+                        <Button isDangerous={true} onClick={() => setDeleteUserModalVisible(true)}>Удалить профиль</Button>
                     </div>
                 </div>
                 <div className="profile__transactions-history">

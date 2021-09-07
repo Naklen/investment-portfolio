@@ -463,6 +463,10 @@
     align-items: center;    
 }
 
+.profile__pass {
+    margin-top: 1rem;
+}
+
 .profile__edit-button {    
     width: 1.3rem;
     height: 1.3rem;
@@ -585,4 +589,19 @@
 
 .transactions-list__delete:hover ~ .transactions-list__chevron {
     color: black;
+}
+
+.transactions-list__header_empty {    
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile__delete {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

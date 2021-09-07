@@ -162,6 +162,18 @@ def delete_all_transactions(user_id):
     with db:
         Transaction.delete().where(Transaction.user == user_id).execute()
 
+@eel.expose
+def try_delete_user(user_id, password):
+    with db:
+        user = User.get(User.id == user_id)
+        if generate_hash(password, user.salt) != user.password_hash:
+            return {'error': 'wrong password'}
+        else:
+            User.delete().where(User.id == user_id).execute()
+            UserSecurity.delete().where(UserSecurity.user == user_id).execute()
+            Transaction.delete().where(Transaction.user == user_id).execute()
+            return {'done': 'user deleted'}
+
 
 def main(develop):
     with db:

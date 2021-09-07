@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route } from "react-router-dom"
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"
 import Navmenu from "./components/Navmenu.jsx";
 import Exchange from './screens/Exchange.jsx'
 import Portfolio from './screens/Portfolio.jsx'
@@ -9,6 +9,7 @@ import { Context } from './context'
 import LoginModal from "./components/LoginModal.jsx";
 import NewUserModal from "./components/NewUserModal.jsx";
 import Profile from "./screens/Profile.jsx";
+import DeleteUserModal from "./components/DeleteUserModal.jsx";
 
 export const eel = window.eel
 eel.set_host('ws://localhost:8080')
@@ -19,6 +20,7 @@ function App() {
   const [portfolioSortAndFilter, setPortfolioSortAndFilter] = useState({ sort: { option: '', isDescending: false }, searchQuery: '' })
   const [loginModalVisible, setLoginModalVisible] = useState(false)
   const [newUserModalVisible, setNewUserModalVisible] = useState(false)
+  const [deleteUserModalVisible, setDeleteUserModalVisible] = useState(false)
   
   return (
     <Context.Provider value={{
@@ -31,7 +33,9 @@ function App() {
       loginModalVisible,
       setLoginModalVisible,
       newUserModalVisible,
-      setNewUserModalVisible
+      setNewUserModalVisible,
+      deleteUserModalVisible,
+      setDeleteUserModalVisible
       }}>
       <main className="main">    
         <BrowserRouter>        
@@ -39,22 +43,26 @@ function App() {
           <div className="screen-layout">
             <div className="navmenu-fake"/>
             <div className="screen">
-              <Route path="/portfolio">
-                <Portfolio/>
-              </Route>
-              <Route path="/exchange">
-                <Exchange/>
-              </Route>
-              <Route path="/security/:market/:board/:secid">
-                <Security/>
-              </Route>
-              <Route path="/profile">
-                <Profile/>
-              </Route>
+              <Switch>
+                <Route path="/portfolio">
+                  <Portfolio/>
+                </Route>
+                <Route path="/exchange">
+                  <Exchange/>
+                </Route>
+                <Route path="/security/:market/:board/:secid">
+                  <Security/>
+                </Route>
+                <Route path="/profile">
+                  <Profile/>
+                </Route>
+                <Redirect to="/exchange"/>                
+              </Switch>
             </div>
           </div>
           <LoginModal visible={loginModalVisible} setVisible={setLoginModalVisible}></LoginModal>
           <NewUserModal visible={newUserModalVisible} setVisible={setNewUserModalVisible}></NewUserModal>
+          <DeleteUserModal visible={deleteUserModalVisible} setVisible={setDeleteUserModalVisible}></DeleteUserModal>
         </BrowserRouter>    
       </main>
     </Context.Provider>
