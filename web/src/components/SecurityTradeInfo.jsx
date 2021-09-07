@@ -2,7 +2,7 @@ import React from 'react'
 import SecurityPriceBlock from './SecurityPriceBlock'
 import { nf } from '../utils/numberFormat.js'
 
-export default function SecurityTradeInfo({ security }) {  
+export default function SecurityTradeInfo({ security, market = ''}) {  
     const tips = {
         offer: "Лучшая котировка на продажу",
         bid: "Лучшая котировка на покупку",
@@ -16,7 +16,7 @@ export default function SecurityTradeInfo({ security }) {
     return (
         <div className="security-screen__trade-info">
             <SecurityPriceBlock className="security-screen__price-block" price={security.LAST}
-                change={security.CHANGE} changePercent={security.LASTTOPREVPRICE} />
+                change={security.CHANGE} changePercent={security.LASTTOPREVPRICE} market={market}/>
             <div className="trade-info__info-unit offer-bid-unit">
                 <div className="offer-bid-unit__offer" title={tips.offer}><span>Предложение:</span> { security.OFFER ? nf(security.OFFER) : dash}</div>
                 <div className="offer-bid-unit__bid" title={tips.bid}><span>Спрос:</span> { security.BID ? nf(security.BID) : dash}</div>

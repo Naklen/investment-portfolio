@@ -119,8 +119,8 @@ export default function Portfolio() {
                                             }
                                         </div>
                                             <PortfolioSidebar
-                                                secCount={userSecurities.reduce((acc, sec) => acc.count + sec.count)}
-                                                totalPrice={userSecurities.reduce((acc, sec) => acc.LAST*acc.count + sec.LAST*sec.count).toFixed()}/>
+                                                secCount={userSecurities.reduce((acc, sec) => acc + sec.count, 0)}
+                                                totalPrice={userSecurities.reduce((acc, sec) => acc + sec.total, 0).toFixed()}/>
                                     </div>                        
                                 }                        
                             </div>

@@ -33,8 +33,8 @@ export default function Security() {
                 <UserSecurityCount market={market} board={board} secid={secid} price={security.LAST}/>
             }
             <div className="security-screen__board">Режим торгов: {security.BOARDNAME} ({security.BOARDID})</div>
-            <SecurityTradeInfo security={security} />
-            <SecurityParametersOfInstrument security={security}/>
+            <SecurityTradeInfo security={security} market={market}/>
+            <SecurityParametersOfInstrument security={security} market={market}/>
         </div>
     )
 }
