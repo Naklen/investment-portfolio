@@ -166,18 +166,37 @@ def delete_all_transactions(user_id):
 def try_delete_user(user_id, password):
     with db:
         user = User.get(User.id == user_id)
-        if generate_hash(password, user.salt) != user.password_hash:
+        if user.name != 'Admin':
+            if generate_hash(password, user.salt) != user.password_hash:
+                return {'error': 'wrong password'}
+            else:
+                User.delete().where(User.id == user_id).execute()
+                UserSecurity.delete().where(UserSecurity.user == user_id).execute()
+                Transaction.delete().where(Transaction.user == user_id).execute()
+                return {'done': 'user deleted'}
+        else:
+            return
+
+@eel.expose
+def try_clear_database(admin_password):
+    with db:
+        admin = User.get(User.name == 'Admin')
+        if generate_hash(admin_password, admin.salt) != admin.password_hash:
             return {'error': 'wrong password'}
         else:
-            User.delete().where(User.id == user_id).execute()
-            UserSecurity.delete().where(UserSecurity.user == user_id).execute()
-            Transaction.delete().where(Transaction.user == user_id).execute()
-            return {'done': 'user deleted'}
+            Transaction.delete().execute()
+            UserSecurity.delete().execute()
+            User.delete().execute()
+            Security.delete().execute()
+            try_create_user('Admin', 'admin')
+            try_create_user('User', '')
+            return {'done': 'database cleared'}
 
 
 def main(develop):
     with db:
         if len(User) == 0:
+            try_create_user('Admin', 'admin')
             try_create_user('User', '')            
 
     if develop:

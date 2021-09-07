@@ -9,7 +9,7 @@ import Button from '../components/UI/button/Button'
 import TransactionsList from '../components/transactionList/TransactionsList'
 
 export default function Profile() {
-    const { user, setUser, setDeleteUserModalVisible } = useContext(Context)
+    const { user, setUser, setDeleteUserModalVisible, setClearDBModalVisible } = useContext(Context)
     const [nameExpand, setNameExpand] = useState(false)
     const [nameDanger, setNameDanger] = useState(false)
     const [newName, setNewName] = useState('')
@@ -95,14 +95,19 @@ export default function Profile() {
                                 }
                             </span>
                         </div>
-                        <form className="profile__new-name">
-                            <Input isDangerous={nameDanger} autocomplete="off" id="editName" placeholder={namePlacehoder} type="text" value={newName}
-                                onChange={e => { setNameDanger(false); setNewName(e.target.value) }}>
-                            </Input>
-                            <Button className="profile__edit-button" onClick={e => editName(e)} title="Сохранить">
-                                <SaveIcon className="profile__icon profile__save"></SaveIcon>
-                            </Button>
-                        </form>
+                        {
+                            user.name !== 'Admin' ?
+                                <form className="profile__new-name">
+                                    <Input isDangerous={nameDanger} autocomplete="off" id="editName" placeholder={namePlacehoder} type="text" value={newName}
+                                        onChange={e => { setNameDanger(false); setNewName(e.target.value) }}>
+                                    </Input>
+                                    <Button className="profile__edit-button" onClick={e => editName(e)} title="Сохранить">
+                                        <SaveIcon className="profile__icon profile__save"></SaveIcon>
+                                    </Button>
+                                </form>
+                                :
+                                <div className="profile__new-name">Нельзя сменить имя профилю администратора</div>
+                        }
                     </div>
                     <div className={`profile__pass${passExpand ? ' profile__pass_expand' : ''}`}>                                                                           
                         <Button isDangerous={passExpand} onClick={e => setPassExpand(!passExpand)} > {passExpand ? 'Закрыть' : 'Сменить пароль'}</Button>                        
@@ -134,10 +139,17 @@ export default function Profile() {
                                 <SaveIcon className="profile__icon profile__save"></SaveIcon>
                             </Button>
                         </form>
-                    </div>
-                    <div className="profile__delete">
-                        <Button isDangerous={true} onClick={() => setDeleteUserModalVisible(true)}>Удалить профиль</Button>
-                    </div>
+                    </div>                    
+                    {
+                        user.name === 'Admin' ?
+                            <div className="profile__clearBD">
+                                <Button isDangerous={true} onClick={() => setClearDBModalVisible(true)}>Очистить базу данных</Button>
+                            </div>
+                            :
+                            <div className="profile__delete">
+                                <Button isDangerous={true} onClick={() => setDeleteUserModalVisible(true)}>Удалить профиль</Button>
+                            </div>
+                    }
                 </div>
                 <div className="profile__transactions-history">
                     <TransactionsList></TransactionsList>            

@@ -599,7 +599,8 @@
     align-items: center;
 }
 
-.profile__delete {
+.profile__delete,
+.profile__clearBD {
     margin-top: 1.5rem;
     display: flex;
     flex-direction: column;

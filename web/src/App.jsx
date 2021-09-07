@@ -10,6 +10,7 @@ import LoginModal from "./components/LoginModal.jsx";
 import NewUserModal from "./components/NewUserModal.jsx";
 import Profile from "./screens/Profile.jsx";
 import DeleteUserModal from "./components/DeleteUserModal.jsx";
+import ClearDBModal from "./components/ClearDBModal.jsx";
 
 export const eel = window.eel
 eel.set_host('ws://localhost:8080')
@@ -21,6 +22,7 @@ function App() {
   const [loginModalVisible, setLoginModalVisible] = useState(false)
   const [newUserModalVisible, setNewUserModalVisible] = useState(false)
   const [deleteUserModalVisible, setDeleteUserModalVisible] = useState(false)
+  const [clearDBModalVisible, setClearDBModalVisible] = useState(false)
   
   return (
     <Context.Provider value={{
@@ -35,7 +37,9 @@ function App() {
       newUserModalVisible,
       setNewUserModalVisible,
       deleteUserModalVisible,
-      setDeleteUserModalVisible
+      setDeleteUserModalVisible,
+      clearDBModalVisible,
+      setClearDBModalVisible
       }}>
       <main className="main">    
         <BrowserRouter>        
@@ -63,6 +67,7 @@ function App() {
           <LoginModal visible={loginModalVisible} setVisible={setLoginModalVisible}></LoginModal>
           <NewUserModal visible={newUserModalVisible} setVisible={setNewUserModalVisible}></NewUserModal>
           <DeleteUserModal visible={deleteUserModalVisible} setVisible={setDeleteUserModalVisible}></DeleteUserModal>
+          <ClearDBModal visible={clearDBModalVisible} setVisible={setClearDBModalVisible}></ClearDBModal>
         </BrowserRouter>    
       </main>
     </Context.Provider>
