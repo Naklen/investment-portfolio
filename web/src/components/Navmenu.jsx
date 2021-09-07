@@ -24,6 +24,7 @@ export default function Navmenu({setLoginModalVisible, setNewUserModalVisible}) 
             :
             <header className='navmenu__header'>
               Пользователь: <span title='Нажмите, чтобы сменить пользователя' onClick={() => setLoginModalVisible(true)}>{user.name}</span>
+              <br />
               <Button isDangerous={true} onClick={() => { router.push('/exchange'); setUser({}); }}>Выйти</Button>
             </header>
         }
