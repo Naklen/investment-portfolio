@@ -1,4 +1,6 @@
+altgraph==0.17
 apimoex==1.2.0
+autopep8==1.5.7
 bottle==0.12.19
 bottle-websocket==0.2.9
 certifi==2021.5.30
@@ -11,9 +13,15 @@ gevent-websocket==0.10.1
 greenlet==1.1.1
 idna==3.2
 peewee==3.14.4
+pefile==2021.9.3
+pycodestyle==2.7.0
 pycparser==2.20
+pyinstaller==4.5.1
+pyinstaller-hooks-contrib==2021.3
 pyparsing==2.4.7
+pywin32-ctypes==0.2.0
 requests==2.26.0
+toml==0.10.2
 urllib3==1.26.6
 whichcraft==0.6.1
 zope.event==4.5.0
