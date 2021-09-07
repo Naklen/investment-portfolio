@@ -4,7 +4,7 @@ import Input from '../UI/input/Input'
 import Select from '../UI/select/Select'
 import Switch from '../UI/switch/Switch'
 
-export default function PortfolioSidebar() {
+export default function PortfolioSidebar({secCount, totalPrice}) {
     const {portfolioSortAndFilter, setPortfolioSortAndFilter} = useContext(Context)
     return (
         <aside className="sidebar">
@@ -25,6 +25,10 @@ export default function PortfolioSidebar() {
             <Input autocomplete="off" id="search" placeholder="Поиск" type="text" value={portfolioSortAndFilter.searchQuery}
                 onChange={e => setPortfolioSortAndFilter({ ...portfolioSortAndFilter, searchQuery: e.target.value })}>
             </Input>
+            <br />
+            <h4 title="Общее количество ц/б в портфеле">Ценных бумаг в портфеле:&nbsp;{secCount}</h4>
+            <br />
+            <h4 title="Общая стоимость ц/б в портфеле">Стоимость портфеля:&nbsp;{totalPrice}</h4>
         </aside>
     )
 }

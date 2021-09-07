@@ -118,7 +118,9 @@ export default function Portfolio() {
                                                         title='Иностранные ценные бумаги' />
                                             }
                                         </div>
-                                        <PortfolioSidebar/>
+                                            <PortfolioSidebar
+                                                secCount={userSecurities.reduce((acc, sec) => acc.count + sec.count)}
+                                                totalPrice={userSecurities.reduce((acc, sec) => acc.LAST*acc.count + sec.LAST*sec.count).toFixed()}/>
                                     </div>                        
                                 }                        
                             </div>
