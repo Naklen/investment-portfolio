@@ -25,6 +25,7 @@ export default function UserSecurityCount({ market, board, secid, price }) {
                 count: changeCount,
                 price: price
             }, true, new Date(Date.now()).toISOString())().then(() => { setCount(count + changeCount); setChangeCount('') })
+            setDanger(false)
             price ? setPlaceholder(`Добавлено: ${changeCount}`) : setPlaceholder(`Добавлено без цены: ${changeCount}`)
         }                
     }
@@ -38,6 +39,7 @@ export default function UserSecurityCount({ market, board, secid, price }) {
                     count: changeCount,
                     price: price
                 }, false, new Date(Date.now()).toISOString())().then(() => { setCount(count - changeCount); setChangeCount('') })
+                setDanger(false)
                 setPlaceholder(`Убрано: ${changeCount}`)
             }
         }

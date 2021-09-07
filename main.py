@@ -195,6 +195,17 @@ def try_clear_database(admin_password):
 
 def main(develop):
     with db:
+        if not User.table_exists():
+            User.create_table()    
+
+        if not Security.table_exists():
+            Security.create_table()   
+
+        if not UserSecurity.table_exists():
+            UserSecurity.create_table()
+
+        if not Transaction.table_exists():
+            Transaction.create_table()
         if len(User) == 0:
             try_create_user('Admin', 'admin')
             try_create_user('User', '')            

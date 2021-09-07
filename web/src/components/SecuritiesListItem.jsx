@@ -8,7 +8,7 @@ export default function SecuritiesListItem({listType, screenType, ...props}) {
     const router = useHistory()
     const { exchangeState } = useContext(Context)
     const dash = '\u2014'    
-    const total = listType === exchangeTypes.bonds ? (((props.price / 100)*1000)*props.count).toFixed(2) : props.price * props.count
+    const total = listType === exchangeTypes.bonds ? (((props.price / 100)*1000)*props.count).toFixed(2) : (props.price * props.count).toFixed(2)
     const route = screenType === screenTypes.exchange ? 
         `/security/${exchangeState.market}/${exchangeState.board}/${props.secid}`
         :
