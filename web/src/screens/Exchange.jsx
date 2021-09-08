@@ -25,8 +25,7 @@ export default function Exchange() {
 
     const sortedAndSearchedSecurities = useSecurities(securities, exchangeState.sort, exchangeState.searchQuery)    
 
-    async function setSpecifiedSecurities(market, board) {
-        console.log('get')
+    async function setSpecifiedSecurities(market, board) {        
         setSecurities(await eel.get_securities_list(market, board)())
         setIsSecuritiesLoading(false)
     }

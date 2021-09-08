@@ -15,8 +15,7 @@ export default function DeleteUserModal({ visible, setVisible }) {
     const deleteUser = async (e) => {
         e.stopPropagation()
         e.preventDefault()
-        const isDeleted = await eel.try_delete_user(user.id, password)()
-        console.log(isDeleted)
+        const isDeleted = await eel.try_delete_user(user.id, password)()        
         if (isDeleted.hasOwnProperty('done')) {
             setUser({})
             router.push('/exchange')

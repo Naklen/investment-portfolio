@@ -19,7 +19,6 @@ export default function Portfolio() {
 
     useEffect(() => {
         setIsSecuritiesLoading(true)
-        console.log('ddd')
         eel.get_user_securities(user.id)().then(res => { if(res.length === 0) setIsSecuritiesLoading(false); setSecuritiesFromDB(res) })
     }, [user])
 

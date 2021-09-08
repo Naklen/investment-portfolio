@@ -25,8 +25,7 @@ export default function NewUserModal({visible, setVisible}) {
             setUser(newUser)
             setVisible(false)
         }            
-        if (newUser.hasOwnProperty('error')) {
-            console.log(newUser.error)
+        if (newUser.hasOwnProperty('error')) {          
             if (newUser.error === 'user already exist')
                 setNameDanger(true)                
         }        

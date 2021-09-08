@@ -10,8 +10,7 @@ import Button from './UI/button/Button'
 export default function Navmenu({setLoginModalVisible, setNewUserModalVisible}) {
     const {user, setUser} = useContext(Context)    
     const location = useLocation()
-    const router = useHistory()
-    console.log('nav')
+    const router = useHistory()    
     return (
         <nav className="navmenu">
         {

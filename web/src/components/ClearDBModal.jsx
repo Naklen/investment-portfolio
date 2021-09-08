@@ -15,8 +15,7 @@ export default function ClearDBModal({ visible, setVisible }) {
     const clearDatabase = async (e) => {
         e.stopPropagation()
         e.preventDefault()
-        const isCleared = await eel.try_clear_database(password)()
-        console.log(isCleared)
+        const isCleared = await eel.try_clear_database(password)()        
         if (isCleared.hasOwnProperty('done')) {
             setUser({})
             router.push('/exchange')

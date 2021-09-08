@@ -12,8 +12,7 @@ export default function UserSecurityCount({ market, board, secid, price }) {
     const [changeCount, setChangeCount] = useState('')
     const [danger, setDanger] = useState(false)
     const [placeholder, setPlaceholder] = useState('Добавить/Удалить')
-    useEffect(() => {
-        console.log('usc')
+    useEffect(() => {        
         eel.get_user_security_count(user.id, secid)().then(c => setCount(c))
     }, [user, secid])
     const addSecurity = () => {        
