@@ -28,7 +28,7 @@ export default function PortfolioSidebar({secCount, totalPrice}) {
             <br />
             <h4 title="Общее количество ц/б в портфеле">Ценных бумаг в портфеле:&nbsp;{secCount}</h4>
             <br />
-            <h4 title="Общая стоимость ц/б в портфеле">Стоимость портфеля:&nbsp;{totalPrice}</h4>
+            <h4 title="Общая стоимость ц/б в портфеле">Стоимость портфеля:&nbsp;{totalPrice}&nbsp;{'\u20BD'}</h4>
         </aside>
     )
 }

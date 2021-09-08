@@ -19,8 +19,9 @@ export default function Portfolio() {
 
     useEffect(() => {
         setIsSecuritiesLoading(true)
+        console.log('ddd')
         eel.get_user_securities(user.id)().then(res => { if(res.length === 0) setIsSecuritiesLoading(false); setSecuritiesFromDB(res) })
-    }, [user])    
+    }, [user])
 
     const sortedByMarketAndBoardSecurities = useSortedByMarketAndBoardSecurities(securitiesFromDB)
 
@@ -50,10 +51,14 @@ export default function Portfolio() {
         if (securitiesFromDB.length !== 0) {
             getUserSecurities()
         }
+        else
+            setUserSecurities([])
         const id = setInterval(() => {            
             if (securitiesFromDB.length !== 0) {
                 getUserSecurities()
             }
+            else
+                setUserSecurities([])
         }, 60*1000)
         return () => {
             clearInterval(id)

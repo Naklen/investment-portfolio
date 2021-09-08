@@ -3,6 +3,6 @@ virt/
 database.db
 test.py
 .vscode/
-main.spec
+*.spec
 build/
 dist/
