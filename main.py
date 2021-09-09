@@ -3,7 +3,7 @@ import asyncio
 import sys
 import platform
 from models import *
-from eel_functions import *
+from exposed_functions import *
 
 sys.path.insert(1, '../../')
 
@@ -54,7 +54,7 @@ def main(develop):
             raise
 
 if __name__ == '__main__':
-    main(develop=len(sys.argv) == 2)
+    main(len(sys.argv) == 2)
 
 
 
